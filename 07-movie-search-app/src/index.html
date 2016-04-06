@@ -10,13 +10,13 @@
   </head>
   <body>
     <!-- sample angular code -->
-    <div class="container">
-      <div ng-controller="myController">
+    <div class="container" ng-controller="myController">
+      <div class="row">
         <h1 class="text-center">{{ title }}</h1>
         <h3 class="text-center">{{ subtitle }}</h3>
         <div class="col-md-4 col-md-offset-4">
-          <form ng-submit="">
-            <input class="form-control center-block" ng-model="movie.title" placeholder="Moive Title"><br>
+          <form ng-submit="getMovies(search.title)">
+            <input class="form-control center-block" ng-model="search.title" placeholder="Moive Title"><br>
             <button class="btn btn-primary center-block">Search!</button>
           </form>
         </div>
