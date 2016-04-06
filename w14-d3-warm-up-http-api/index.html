@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="pokemon">
+<head>
+  <title>Pokemo</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body ng-controller="pokemonController">
+
+<div class="container">
+  <div class="row">
+    <h2 class="text-center">Welcome to {{myVar}}</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="text-center">Generate a random Pokemon!</h3>
+      <button class="btn btn-primary btn-block" ng-click="getPokemon()">Generate</button>
+      <h3 class="text-center">{{rndPokemon}}</h3>
+      <img ng-src="{{pokemonImg}}" class="center-block" width="200px">
+      <p class="text-center"><strong>{{pokemonName}}</strong></p>
+      
+      
+    </div>
+    <div class="col-md-6">
+      <h3 class="text-center">Generate a random Pokemon move!</h3>
+      <button class="btn btn-primary btn-block" ng-click="getMove()">Generate</button>
+      <h3 class="text-center">{{rndMove}}</h3>
+      <p class="text-center"><strong>{{pokemonMove}}</strong></p>
+      <img ng-src="{{moveImg}}" class="center-block" width="200px">
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>    
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.10/angular.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.10/angular-route.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<!-- <script type="text/javascript" src="js/routes.js"></script> -->
+<script type="text/javascript" src="controllers.js"></script>
+</body>
+</html>
