@@ -1,10 +1,7 @@
 <div class="row movies">
-  <div class="col-md-4" ng-repeat="movie in movies">
-    <div>
-    <!-- <div class="clearfix" ng-if="$index % 3 == 0"> -->
-      <a href="#/show"></a>
+  <div class="col-md-4" ng-repeat="movie in movies.Search">
+    <div ng-click="getMovie(movie.imdbID)">
       <img ng-src="{{movie.Poster}}" height="400px" class="center-block"><br>
-    <!-- <div class="pull-right"> -->
       <p class="center-block"><strong>Title:</strong> {{movie.Title}}</p>
       <p class="center-block"><strong>Year:</strong> {{movie.Year}}</p>
     </div>

@@ -7,13 +7,20 @@ app.controller('myController', ['$scope', 'omdbAPI', '$location', function ($sco
     $location.path('/'+title);
     omdbAPI.getMovies(title)
       .then(function (results) {
-        console.log(results.data.Search)
-        $scope.movies = results.data.Search
+        console.log(results.data)
+        $scope.movies = results.data
+        console.log($scope.movies);
       });
   }
-}]);
 
-app.controller('indexController', ['$scope', function ($scope) {
-  $scope.title = "Angular OMDB API Search";
-  $scope.subtitle = "Enter a movie name (by title)"
-}])
+  $scope.getMovie = function (id) {
+    $location.path('/movie/'+id);
+    omdbAPI.getMovie(id)
+      .then(function (result) {
+        console.log(result.data);
+        $scope.singleMovie = result.data;
+        console.log($scope.singleMovie.Title);
+      });
+
+  }
+}]);
