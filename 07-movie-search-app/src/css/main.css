@@ -1,1 +1,21 @@
 /* add custom styles */
+.col-md-4 p {
+  width: 250px;
+}
+
+
+
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-md-4 div {
+  margin: 10px;
+  border-radius: 10px;
+  border: 1px #999 solid;
+}
+
+img {
+  margin-top: 10px
+}
