@@ -10,7 +10,7 @@ app.config(function ($routeProvider, $locationProvider) {
     })
     .when('/movie/:id', {
       templateUrl: 'templates/movie.html',
-      controller: 'myController'
+      controller: 'movieController'
     })
     .otherwise('/');
 });
