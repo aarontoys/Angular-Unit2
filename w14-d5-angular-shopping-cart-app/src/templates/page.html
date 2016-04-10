@@ -1,3 +1,68 @@
-  <!-- <div ng-controller="myController"> -->
-    <p>{{ greeting }}</p>
-  <!-- </div> -->
+
+
+<div class="row">
+  <ul class="list-inline">
+    <li>Search by category:
+      <select>
+        <option value="1">1</option>
+        <option value="2">2</option>
+      </select>
+    </li>
+    <li><form class="form-inline">Search by name: <input class="form-control"></form>
+    </li>
+    <button class="btn btn-success pull-right">Checkout | Bag:</button>
+  </ul>
+
+</div>
+<div class="row">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Tea</th>
+        <th>
+        <span class="pull-left">Information</span>
+        <span class="pull-right"> Sort by Price:
+          <select>
+            <option>Lowest</option>
+            <option>Highest</option>
+          </select>
+        </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="tea in teas">
+        <td><img ng-src="{{tea.imageUrl}}"></td>
+        <td>
+          <div class="row">
+            <div class="col-md-12">
+              <ul class="list-inline">
+                <li>
+                  <h3>{{tea.name}}</h3>
+                </li>
+                <li class="pull-right h3">Quantity:
+                <select>
+                  <option ng-repeat="num in nums" value="{{num}}">{{num}}</option>
+                </select>
+                <!-- <li class="pull-right"> --><button class="btn btn-warning">Add to Bag</button></li>
+              </ul>
+            </div> 
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p><strong>Price: </strong>{{tea.price}}</p>
+              <p><strong>Caffeine Scale: </strong>{{tea.caffeineScale}}</p>
+              <p><strong>Ingredients: </strong>{{tea.ingredients}}</p>
+              <p><strong>Rating: </strong>{{tea.rating}}</p>
+              <p><strong>In Stock?: </strong>{{tea.inStock}}</p>
+              <p><strong>Categories: </strong></p>
+                <ul>
+                  <li ng-repeat="cat in tea.categories">{{cat}}</li>
+                </ul>
+            </div>
+          </div>
+        </td>
+    </tbody>
+    
+  </table>
+</div>
