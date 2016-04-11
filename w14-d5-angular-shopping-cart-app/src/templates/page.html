@@ -23,16 +23,16 @@
         <th>
         <span class="pull-left">Information</span>
         <span class="pull-right"> Sort by Price:
-          <select>
-            <option ng-repeat="tea in teas">Lowest</option>
-            <option>Highest</option>
+          <select ng-model="priceSort">
+            <option value="price">Lowest</option>
+            <option value="-price">Highest</option>
           </select>
         </span>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="tea in teas | filter : search | filter : search ">
+      <tr ng-repeat="tea in teas | filter : search | filter : search | orderBy : priceSort">
         <td><img ng-src="{{tea.imageUrl}}"></td>
         <td>
           <div class="row">
@@ -45,7 +45,7 @@
                 <select ng-model="selNum">
                   <option ng-repeat="num in nums" value="{{num}}">{{num}}</option>
                 </select>
-                <!-- <li class="pull-right"> --><button class="btn btn-warning" ng-click="addToBag(tea, selNum)">Add to Bag</button></li>
+                <button class="btn btn-warning" ng-click="tea.inStock && addToBag(tea, selNum)" ng-class="{disabled: !tea.inStock}">Add to Bag</button></li>
               </ul>
             </div> 
           </div>
