@@ -161,8 +161,14 @@ app.controller('checkoutController', ['$scope', 'shoppingService', function ($sc
     $scope.my.edit = true;
     $scope.cartTotal = 0;
     calTotal();
-    console.log($scope.my.edit);
   }
-  console.log($scope.my.edit);
+
+  $scope.remove = function (item) {
+    console.log('remove',item);
+    shoppingService.removeItem(item);
+    $scope.cartItems = shoppingService.getCartItems();
+    $scope.cartTotal = 0;
+    calTotal();
+  }
     
 }]);
