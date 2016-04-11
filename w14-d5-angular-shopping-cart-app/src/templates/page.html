@@ -11,7 +11,7 @@
     </li>
     <li><form class="form-inline">Search by name: <input class="form-control" ng-model="search.name"></form>
     </li>
-    <a href="#/checkout"><button class="btn btn-danger pull-right">Checkout | Bag:{{cartItems.length}}</button></a>
+    <a href="#/checkout"><button class="btn btn-danger pull-right">Checkout | Bag: <span ng-if="!cartItems.length">Empty!</span><span ng-if="cartItems.length">({{cartItems.length}})</span></button></a>
   </ul>
   <p>{{category}}</p>
 </div>
