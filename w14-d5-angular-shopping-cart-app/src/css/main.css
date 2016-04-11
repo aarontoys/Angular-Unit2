@@ -1,1 +1,4 @@
 /* add custom styles */
+td:first-of-type {
+  width: 253px;
+}
