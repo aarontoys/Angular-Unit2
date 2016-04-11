@@ -1,5 +1,5 @@
 
-app.controller('myController', ['$scope', function($scope) {
+app.controller('myController', ['$scope', 'shoppingService', function($scope, shoppingService) {
   $scope.teas = [
     {
         "_id": "55c8ee82152165d244b98300",
@@ -7,7 +7,7 @@ app.controller('myController', ['$scope', function($scope) {
         "ingredients": "concentrated gluten, jewelry, dill, beetle nut, toast",
         "caffeineScale": 244,
         "price": 1540,
-        "inStock": true,
+        "inStock": false,
         "rating": 1,
         "imageUrl": "http://s7d5.scene7.com/is/image/Teavana/32664_d?$cimg$",
         "__v": 0,
@@ -123,5 +123,46 @@ app.controller('myController', ['$scope', function($scope) {
     }
   ]
 
-  $scope.nums = ['',2,3,4,5,6,7,8,9]
+  $scope.nums = [2,3,4,5,6,7,8,9,10]
+
+  $scope.catArr = [];
+  $scope.teas.forEach(function (el) {
+   
+    el.categories.forEach(function (innerEl) {
+      if ($scope.catArr.indexOf(innerEl) === -1) {
+        $scope.catArr.push(innerEl);
+      } 
+    });
+  });
+
+  $scope.addToBag = function (tea, selNum) {
+    shoppingService.addToCart(tea, selNum);
+  }
+
+  $scope.cartItems = shoppingService.getCartItems();
+}]);
+
+app.controller('checkoutController', ['$scope', 'shoppingService', function ($scope, shoppingService) {
+
+  $scope.my = {edit: true};
+  $scope.cartItems = shoppingService.getCartItems();
+
+  $scope.cartTotal = 0; 
+
+  calTotal = function () {$scope.cartItems.forEach(function (el) {
+      $scope.cartTotal += el.price * el.qty / 100;
+    })
+  }
+
+  calTotal();
+
+  $scope.save = function (item, qty) {
+    shoppingService.saveItem(item, qty);
+    $scope.my.edit = true;
+    $scope.cartTotal = 0;
+    calTotal();
+    console.log($scope.my.edit);
+  }
+  console.log($scope.my.edit);
+    
 }]);

@@ -4,12 +4,9 @@ app.config(function ($routeProvider, $locationProvider) {
       templateUrl: 'templates/page.html',
       controller: 'myController'
     })
-    // .when('/boulder', {
-    //   templateUrl: 'templates/boulder.html',
-    //   controller: 'weatherController'
-    // })
-    // .when('/', {
-    //   templateUrl: 'templates/main.html'
-    // })
+    .when('/checkout', {
+      templateUrl: 'templates/checkout.html',
+      controller: 'checkoutController'
+    })
     .otherwise('/');
 });

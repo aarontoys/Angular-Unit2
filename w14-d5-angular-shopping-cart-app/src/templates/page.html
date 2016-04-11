@@ -3,16 +3,17 @@
 <div class="row">
   <ul class="list-inline">
     <li>Search by category:
-      <select>
-        <option value="1">1</option>
-        <option value="2">2</option>
+      <select ng-model="search.categories">
+        <!-- <option value="1"></option> -->
+        <option value=""></option>
+        <option value="{{cat}}" ng-repeat="cat in catArr">{{cat}}</option>
       </select>
     </li>
-    <li><form class="form-inline">Search by name: <input class="form-control"></form>
+    <li><form class="form-inline">Search by name: <input class="form-control" ng-model="search.name"></form>
     </li>
-    <button class="btn btn-success pull-right">Checkout | Bag:</button>
+    <a href="#/checkout"><button class="btn btn-danger pull-right">Checkout | Bag:{{cartItems.length}}</button></a>
   </ul>
-
+  <p>{{category}}</p>
 </div>
 <div class="row">
   <table class="table table-bordered">
@@ -23,7 +24,7 @@
         <span class="pull-left">Information</span>
         <span class="pull-right"> Sort by Price:
           <select>
-            <option>Lowest</option>
+            <option ng-repeat="tea in teas">Lowest</option>
             <option>Highest</option>
           </select>
         </span>
@@ -31,7 +32,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="tea in teas">
+      <tr ng-repeat="tea in teas | filter : search | filter : search ">
         <td><img ng-src="{{tea.imageUrl}}"></td>
         <td>
           <div class="row">
@@ -41,20 +42,20 @@
                   <h3>{{tea.name}}</h3>
                 </li>
                 <li class="pull-right h3">Quantity:
-                <select>
+                <select ng-model="selNum">
                   <option ng-repeat="num in nums" value="{{num}}">{{num}}</option>
                 </select>
-                <!-- <li class="pull-right"> --><button class="btn btn-warning">Add to Bag</button></li>
+                <!-- <li class="pull-right"> --><button class="btn btn-warning" ng-click="addToBag(tea, selNum)">Add to Bag</button></li>
               </ul>
             </div> 
           </div>
           <div class="row">
             <div class="col-md-12">
-              <p><strong>Price: </strong>{{tea.price}}</p>
+              <p><strong>Price: </strong>{{tea.price / 100 | currency}}</p>
               <p><strong>Caffeine Scale: </strong>{{tea.caffeineScale}}</p>
               <p><strong>Ingredients: </strong>{{tea.ingredients}}</p>
               <p><strong>Rating: </strong>{{tea.rating}}</p>
-              <p><strong>In Stock?: </strong>{{tea.inStock}}</p>
+              <p><strong>In Stock?: </strong><span ng-if="tea.inStock">Yes</span><span ng-if="!tea.inStock">No</span></p>
               <p><strong>Categories: </strong></p>
                 <ul>
                   <li ng-repeat="cat in tea.categories">{{cat}}</li>
