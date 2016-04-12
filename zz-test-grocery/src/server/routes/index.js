@@ -77,25 +77,32 @@ router.get('/', function(req, res, next) {
 router.get('/pingUrls', function (req, res, next){
 
   var myArr = [];
-  res.render('index', {title: 'pingUrls'}); 
+  // res.render('index', {title: 'pingUrls'}); 
 
   var counter = 1; 
 
-  window.getData=function()
-{
-    $.ajax({
-        url:'http://www.omdbapi.com/?i=tt1560954',
-        async: true,
-        dataType: 'jsonp',
-        success:function(data){
-            myArr.push(data.Title);
-            // console.log(data);
-            // $('.quoteList').append('<li>' + data.Title +'</li>');
-            counter++;
-            if (counter < 5) getData();
-        }
-    });
-}
+  function pingUrl () {
+    console.log(counter);
+    // $.ajax({
+    //     url:'http://www.omdbapi.com/?i=tt1560954',
+    //     async: true,
+    //     dataType: 'jsonp',
+    //     success:function(data){
+    //         myArr.push(data.Title);
+    //         // console.log(data);
+    //         // $('.quoteList').append('<li>' + data.Title +'</li>');
+    //         counter++;
+    //         if (counter < 5) pingUrl();
+    //     }
+    // });
+    // if (counter < 5) pingUrl();
+    request('http://www.omdbapi.com/?i=tt1560954', function (err, res, html) {
+      if (!error && response.statusCode == 200) {
+        myArr.push
+    })
+  }
+
+  pingUrl();
 console.log(myArr); 
 });
 
