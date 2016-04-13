@@ -16,8 +16,8 @@ router.get('/', function(req, res, next) {
 
   //   request(url)
   //     .then(function(html) {
-    var scrape = function (html, i) {
-        var $ = cheerio.load(html);
+    var scrape = function (html) {
+        var $ = cheerio.load(html.__body);
         var img, name, size, upc, pageUrl;
         var data = $('.TEXT02').parent() ;
 
@@ -28,11 +28,11 @@ router.get('/', function(req, res, next) {
           name = newData.children().first().next().text(); 
           size = newData.children().first().next().next().text(); 
           upc = newData.children().first().next().next().next().next().text().trim(); 
-          pageUrl = i;
+          pageUrl = html.req.path;
 
           queries.addGroceries(img,name,size,upc,pageUrl) 
             .then(function () {
-              console.log('done');
+              console.log('done: ', img,name,size,upc,pageUrl);
             })
             .catch(function () {
               console.log('upc already in db');
@@ -40,10 +40,20 @@ router.get('/', function(req, res, next) {
         }
       }
       // .catch(function(err){
-      var scrapeErr = function (err, i) {
-        rejectArr.push(i);
-        console.log('rejectArr.length:', rejectArr.length);
-        console.log(rejectArr);
+      var scrapeErr = function (err) {
+        // console.log('error msg: ',err.response.req.path)
+        // rejectArr.push('this is i: ',i);
+        // console.log('rejectArr.length:', rejectArr.length);
+        // console.log(rejectArr);
+        var url = err.response.req.path
+
+        queries.rejectedUrls(url)
+          .then(function () {
+            console.log('rejectd: ', url);
+          })
+          .catch(function () {
+            console.log('rejected url already in db');
+          })
       };
   // }
 
@@ -51,18 +61,27 @@ router.get('/', function(req, res, next) {
 
   var promiseArr = [];
   
+  
   // uri: 'http://products.peapod.com/7732'+i+'.html',
 
-  for (var i = 10; i < 20; i++) {
+  for (var i = 77823 ; i < 77833; i++) {
     var options = {
-      uri: 'http://products.peapod.com/7732'+i+'.html',
+      uri: 'http://products.peapod.com/'+i+'.html',
+      transform: function(body, response) {
+        response.__body = body
+        return response
+      }
     };
     promiseArr.push(request(options)
-      .then(function(html, i){
+      .then(function(html){
         // console.log(data.Title + ' : ' + data.imdbID);
         scrape(html);
+        // console.log('response should show up.')
+        // console.log(html.req.path);
+        // console.log(html.__body);
+        // console.log('i',i);
       })
-      .catch(function(err, i){
+      .catch(function(err){
         // console.log('There was an error: ',err)
         scrapeErr(err);
       })

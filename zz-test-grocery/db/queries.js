@@ -1,5 +1,6 @@
 var knex = require('./knex');
 var Groceries = function() { return knex('groceries');};
+var Urls = function() { return knex('rejected_urls');};
 
 module.exports = {
     addGroceries: function(img, name, size, upc, pageurl) {
@@ -9,6 +10,11 @@ module.exports = {
         size: size,
         upc: upc,
         pageurl: pageurl
+      })
+    },
+    rejectedUrls: function(url) {
+      return Urls().insert({
+        url: url
       })
     }
 }
