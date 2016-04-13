@@ -10,7 +10,7 @@ module.exports = {
         size: size,
         upc: upc,
         pageurl: pageurl
-      })
+      }).returning('upc')  
     },
     rejectedUrls: function(url) {
       return Urls().insert({

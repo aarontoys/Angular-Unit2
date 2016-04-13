@@ -3,6 +3,8 @@ var router = express.Router();
 var request = require('request-promise');
 var cheerio = require('cheerio');
 var queries = require('../../../db/queries')
+var colors = require('colors');
+
 // var cheerioAdv = require('cheerio-advanced-selectors')
 var urlIdArr = [];
 var rejectArr =[];
@@ -31,11 +33,12 @@ router.get('/', function(req, res, next) {
           pageUrl = html.req.path;
 
           queries.addGroceries(img,name,size,upc,pageUrl) 
-            .then(function () {
-              console.log('done: ', img,name,size,upc,pageUrl);
+            .then(function (upc) {
+              // console.log('j',j);
+              console.log('done: '.bgBlue, upc[0].toString().bgBlue);
             })
-            .catch(function () {
-              console.log('upc already in db');
+            .catch(function (err) {
+              console.log(err.detail.slice(11,21).bgYellow.black,' :upc already in db'.bgYellow.black);
             });
         }
       }
@@ -49,10 +52,10 @@ router.get('/', function(req, res, next) {
 
         queries.rejectedUrls(url)
           .then(function () {
-            console.log('rejectd: ', url);
+            console.log('rejectd: '.bgWhite.black, url.toString().byWhite.black);
           })
           .catch(function () {
-            console.log('rejected url already in db');
+            console.log('rejected url already in db'.bgRed);
           })
       };
   // }
