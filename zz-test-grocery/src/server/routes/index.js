@@ -46,9 +46,6 @@ router.get('/', function(req, res, next) {
             console.log('rejected url already in db'.bgRed);
           })
       };
-
-
-  var promiseArr = [];
   
 
   for (var i = 77823 ; i < 77833; i++) {
@@ -59,7 +56,8 @@ router.get('/', function(req, res, next) {
         return response
       }
     };
-    /*promiseArr.push(*/request(options)
+    
+    request(options)
       .then(function(html){
 
         scrape(html);
